@@ -1,0 +1,10 @@
+<section class="flex flex-col">
+  <h1 class="text-2xl font-bold text-gray-800 text-center">Movies</h1>
+  <div class="w-full h-80" >
+    <img class="w-full h-full" src="https://image.tmdb.org/t/p/w500<%= @poster %>" alt="movie poster">
+  </div>
+  <%= render "movies/upcoming" %>
+  <%= render "movies/now_playing"%>
+  <%= render "movies/popular" %>
+  <%= render "movies/top_rated" %>
+</section>
