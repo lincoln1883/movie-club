@@ -7,7 +7,9 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 
 # Load dotenv only in development or test environment
-Dotenv::Rails.load
+if ['development', 'test'].include? ENV['RAILS_ENV']
+  Dotenv::Railtie.load
+end
 module MovieClub
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
