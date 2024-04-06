@@ -1,4 +1,4 @@
-class MoviesController < ApplicationController 
+class MoviesController < ApplicationController
   def index
     @poster = MoviedbApi.new.poster
     @popular = MoviedbApi.new.popular
@@ -19,11 +19,11 @@ class MoviesController < ApplicationController
     #   user_id: current_user.id,
     #   movie_id: @movie['id'],
     #   title: @movie['title'],
-    #   overview: @movie['overview'], 
-    #   poster_path: @movie['poster_path'], 
-    #   released_date: @movie['release_date'], 
-    #   average_vote: @movie['vote_average'], 
-    #   runtime: @movie['runtime'], 
+    #   overview: @movie['overview'],
+    #   poster_path: @movie['poster_path'],
+    #   released_date: @movie['release_date'],
+    #   average_vote: @movie['vote_average'],
+    #   runtime: @movie['runtime'],
     #   genres: @movie['genres'])
   end
 end
