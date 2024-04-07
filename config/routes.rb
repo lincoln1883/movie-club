@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  
+
   resources :movies, only: %i[index show]
-  
-  resources :users do
-    resources :posts do
-      resources :comments
-      resources :likes
-    end
+  resources :users
+
+  resources :posts do
+    resources :comments
+    resources :likes
   end
-  
+
   root "movies#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

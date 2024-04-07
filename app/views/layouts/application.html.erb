@@ -12,7 +12,8 @@
   </head>
 
   <body>
-    <main class="px-5 flex flex-col">
+    <%= render "layouts/navbar" %>
+    <main class="px-5 flex flex-col mt-16">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= yield %>
