@@ -1,0 +1,21 @@
+
+<%= form_for(Post.new) do |f| %>
+  <%= f.hidden_field :author_id, value: current_user.id %>
+  <%= f.hidden_field :movie_id, value: @movie['id'] %>
+  <%= f.hidden_field :title, value: @movie['title'] %>
+  <%= f.hidden_field :image, value: @movie['poster_path'] %>
+  <%= f.hidden_field :overview, value: @movie['overview'] %>
+  <%= f.hidden_field :release_date, value: @movie['release_date'] %>
+  <%= f.hidden_field :rating, value: @movie['vote_average'] %>
+  <%= f.hidden_field :runtime, value: @movie['runtime'] %>
+  <%= f.hidden_field :genres, value: @movie['genres'].map { |genre| genre['name'] } %>
+
+  <div class="mb-4">
+    <%= f.label :review, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= f.text_area :review, class: "w-full p-2 rounded border border-gray-400", placeholder: "Add a review" %>
+  </div>
+
+  <div class="flex justify-center">
+    <%= f.submit "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+<% end %>
