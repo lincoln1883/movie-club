@@ -14,8 +14,11 @@
   <body>
     <%= render "layouts/navbar" %>
     <main class="px-5 flex flex-col mt-16">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <div pose >
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, value, class: "flash #{key == 'notice' ? 'text-center text-green-500' : 'text-center text-red-500'}" %>
+        <% end %>
+      </div>
       <%= yield %>
     </main>
   </body>

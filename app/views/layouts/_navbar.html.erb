@@ -16,12 +16,14 @@
           </button>
           <% if user_signed_in? %>
             <div data-menu-target="element" class="space-y-1 pb-3 pt-2 absolute hidden bg-gray-800 w-screen">
-              <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+              <span>
+                <%= link_to "Movies", movies_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
+              </span>
+              <span>
+                <%= link_to "Posts", posts_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
+              </span>
               <a href="" role="menuitem" tabindex="-1" id="user-menu-item-2">
-                <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
+                  <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
               </a>
             </div>
           <% else %>
@@ -43,14 +45,15 @@
         <div class="hidden sm:block">
           <% if user_signed_in? %>
           <div class="flex items-center space-y-1 px-2 pb-3 pt-2 bg-gray-800">
-              <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
+            <span>
+              <%= link_to "Movies", movies_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
+            </span>
+            <span>
               <%= link_to "Posts", posts_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
-              <span>
-                <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
-              </span>
+            </span>
+            <span>
+              <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
+            </span>
             </div>
           <% else %>
           <div class="flex items-center bg-gray-800">
