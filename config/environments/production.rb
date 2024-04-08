@@ -3,20 +3,20 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = {host: "'https://movie-club-rrq4.onrender.com", protocol: "https"}
-
+  config.action_mailer.default_url_options = {host: "https://movie-club-rrq4.onrender.com", protocol: "https"}
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:         "smtp.gmail.com",
-    port:            587,
-    domain:          "https://movie-club-rrq4.onrender.com",
-    user_name:       Rails.application.credentials.dig(:google_smtp, :email),
-    password:        Rails.application.credentials.dig(:google_smtp, :password),
-    authentication:  "plain",
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "https://movie-club-rrq4.onrender.com",
+    user_name: Rails.application.credentials.dig(:google_smtp, :email),
+    password: Rails.application.credentials.dig(:google_smtp, :password),
+    authentication: "plain",
     enable_starttls: true,
-    open_timeout:    5,
-    read_timeout:    5
+    open_timeout: 5,
+    read_timeout: 5
   }
 
   # Code is not reloaded between requests.
