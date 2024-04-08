@@ -1,0 +1,12 @@
+<div class="flex flex-col p-3 sm:p-10">
+  <h2 class="text-center">Watch Trailers:</h2>
+  <% if @trailer.present? %>
+    <div class="flex flex-wrap gap-1 justify-center">
+      <% @trailer.each do |trailer_key| %>
+        <iframe class="flex-1" title="trailer" width="400" height="315" src="https://www.youtube.com/embed/<%= trailer_key %>" frameborder="0" allowfullscreen></iframe>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center">No trailers available</p>
+  <% end %>
+</div>

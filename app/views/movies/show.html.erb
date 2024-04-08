@@ -1,10 +1,13 @@
 <section class="w-full h-full">
-  <h1 class="text-center"><%= @movie['title']%></h1>
+  <div class="mt-5 flex items-center justify-start">
+    <%= link_to "Back", movies_path, class: "text-white bg-blue-500 p-2 rounded-lg w-18" %>
+  </div>
+   <h1 class="text-center font-medium"><%= @movie['title']%></h1>
     <div class="w-full lg:max-w-full lg:flex">
       <div class="h-96 lg:h-auto lg:w-1/3 flex flex-col rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
         <img src="https://image.tmdb.org/t/p/w500<%= @movie['poster_path'] %>"
           class="w-full h-full" alt="<%= @movie['title'] %>">
-        </div>
+      </div>
       <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
         <div class="mb-8">
           <p class="text-gray-900 font-bold">Title:
@@ -60,9 +63,18 @@
               <% end %>
             </ul>
           <% else %>
-            <p>No watch providers found for this movie in your country.</p>
+            <p class="text-center">No watch providers found for this movie in your country.</p>
           <% end %>
         </div>
       </div>
     </div>
+</section>
+<section>
+  <%= render partial: 'movies/trailers' %>
+</section>
+<section>
+  <%= render partial: 'movies/casts' %>
+</section>
+<section>
+  <%= render partial: 'movies/recommendations' %>
 </section>

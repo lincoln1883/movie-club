@@ -1,0 +1,15 @@
+<div>
+  <% if @casts.present? %>
+    <h2 class="text-center">Cast</h2>
+    <ul class="flex flex-wrap justify-center items-center sm:flex-row gap-1">
+      <% @casts.each do |cast| %>
+        <li class="flex flex-col gap-1 items-center">
+          <img class="w-32 h-32 rounded-full" src="https://image.tmdb.org/t/p/w500<%= cast['profile_path'] %>" alt="">
+          <p class="text-gray-900 leading-none text-sm"><%= cast['name']%></p>
+          <p class="text-gray-900 leading-none text-sm"><%= cast['known_for_department'] %></p>
+      <%end%>
+    </ul>
+  <%else%>
+    <p class="text-center">No casts found for this movie</p>
+  <%end%>
+</div>
