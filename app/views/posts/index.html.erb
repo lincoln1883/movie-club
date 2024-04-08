@@ -1,14 +1,28 @@
-<div class="m-auto h-full">
-  <div class="flex flex-col justify-center gap-4">
+<div class="flex flex-col justify-center items-center w-full">
+  <h1 class="text-4xl font-bold">Posts</h1>
+  <div class="flex flex-col justify-center gap-4 sm:w-4/6 sm:mx-auto w-full mt-2">
     <% @posts.each do |post| %>
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <%= image_tag "https://image.tmdb.org/t/p/w500#{post.image}", class: "w-full h-96 object-cover" %>
-        <div class="p-4">
-          <h1 class="text-2xl font-bold"><%= post.title %></h1>
-          <p class="mt-2 text-gray-600"><%= post.review %></p>
-          <p>by <span><%= post.author.username %></span></p>
-          <div class="flex justify-end mt-4">
-            <%= link_to "View", post_path(post), class: "text-white bg-blue-500 p-2 rounded-lg" %>
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col sm:flex-row">
+        <div class="h-[300px] sm:w-[50%]">
+          <%= image_tag "https://image.tmdb.org/t/p/w500#{post.image}", class: "w-full h-full" %>
+        </div>
+        <div class="p-4 sm:w-[50%] sm:flex sm:flex-col sm:justify-between">
+          <div>
+            <div>
+              <p>Posted by: <span><%= post.author.username %></span></p>
+              <span class="text-start"><%= time_ago_in_words(post.created_at) %> ago</span>
+            </div>
+            <h1 class="text-2xl font-bold"><%= post.title %></h1>
+            <p class="mt-2 text-gray-600"><%= post.review %></p>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex justify-end">
+              <%= link_to "View", post_path(post), class: "text-white bg-blue-500 p-2 rounded-lg w-18" %>
+            </div>
+            <div class="flex gap-1">
+              <p><%= post.comments_count %> comments</p>
+              <p><%= post.likes_count %> likes</p>
+            </div>
           </div>
         </div>
       </div>
