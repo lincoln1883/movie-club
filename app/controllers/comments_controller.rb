@@ -10,9 +10,9 @@ class CommentsController < ApplicationController
     @comment = post.comments.build(comment_params)
     @comment.author = current_user
     if @comment.save
-      flash[:notice] = "Comment was successfully created"
+      flash[:notice] = 'Comment was successfully created'
     else
-      flash[:alert] = @comment.errors.full_messages.join(", ")
+      flash[:alert] = @comment.errors.full_messages.join(', ')
     end
   end
 
