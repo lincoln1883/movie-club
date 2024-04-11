@@ -1,12 +1,13 @@
+# frozen_string_literal: true
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User", foreign_key: :author_id
   has_many :comments, dependent: :destroy
   has_many :likes
 
-  validates :review, presence: true, length: {minimum: 3, maximum: 100}
-  validates :rating, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 10}
-  validates :title, presence: true, length: {minimum: 3, maximum: 50}
-  validates :overview, presence: true, length: {minimum: 5, maximum: 500}
+  validates :review, presence: true, length: { minimum: 3, maximum: 100 }
+  validates :rating, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }
+  validates :title, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :overview, presence: true, length: { minimum: 5, maximum: 500 }
   validates :image, presence: true
   validates :release_date, presence: true
   validates :movie_id, presence: true

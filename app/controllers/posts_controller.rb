@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :set_post, only: %i[show]
 
   def index
@@ -8,8 +9,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    @comments = @post.comments.includes(:author).all.order(created_at: :desc)
     @comment = Comment.new
+    puts @comments.inspect
   end
 
   def new
@@ -22,20 +24,20 @@ class PostsController < ApplicationController
     @movie = MoviedbApi.new.get_movie_details(params[:post][:movie_id])
 
     # Set movie details in the post
-    @post.title = @movie["title"]
-    @post.image = @movie["poster_path"]
-    @post.overview = @movie["overview"]
-    @post.release_date = @movie["release_date"]
-    @post.rating = @movie["vote_average"]
-    @post.runtime = @movie["runtime"]
-    @post.genres = @movie["genres"].map { |genre| genre["name"] }
+    @post.title = @movie['title']
+    @post.image = @movie['poster_path']
+    @post.overview = @movie['overview']
+    @post.release_date = @movie['release_date']
+    @post.rating = @movie['vote_average']
+    @post.runtime = @movie['runtime']
+    @post.genres = @movie['genres'].map { |genre| genre['name'] }
 
     if @post.save
       redirect_to posts_path
-      flash[:notice] = "Post was successfully created"
+      flash[:notice] = 'Post was successfully created'
     else
-      redirect_to movie_path
-      flash[:alert] = @post.errors.full_messages.join(", ")
+      redirect_to movies_path
+      flash[:alert] = @post.errors.full_messages.join(', ')
     end
   end
 
@@ -47,9 +49,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path(@post)
-      flash[:notice] = "Post was successfully updated"
+      flash[:notice] = 'Post was successfully updated'
     else
-      render action: "edit"
+      render action: 'edit'
     end
   end
 
@@ -57,10 +59,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
     if @post.destroy
       redirect_to posts_path
-      flash[:notice] = "Post was successfully deleted"
+      flash[:notice] = 'Post was successfully deleted'
     else
       redirect_to post_path
-      flash[:alert] = "Post could not be deleted"
+      flash[:alert] = 'Post could not be deleted'
     end
   end
 
@@ -71,6 +73,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :overview, :author_id, :movie_id, :review, :rating, :image, :released_date, :runtime, genres: [])
+    params.require(:post).permit(:title, :overview, :author_id, :movie_id, :review, :rating, :image, :released_date, 
+                                 :runtime, genres: [])
   end
 end
