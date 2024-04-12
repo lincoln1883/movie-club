@@ -4,7 +4,7 @@
     <% @posts.each do |post| %>
       <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col sm:flex-row">
         <div class="h-[300px] sm:w-[50%]">
-          <%= image_tag "https://image.tmdb.org/t/p/w500#{post.image}", class: "w-full h-full" %>
+          <%= image_tag "https://image.tmdb.org/t/p/w500#{post.image}", class: "w-full h-full", alt: ''%>
         </div>
         <div class="p-4 sm:w-[50%] sm:flex sm:flex-col sm:justify-between">
           <div>
@@ -13,7 +13,7 @@
               <span class="text-start"><%= time_ago_in_words(post.created_at) %> ago</span>
             </div>
             <h1 class="text-2xl font-bold"><%= post.title %></h1>
-            <p class="mt-2 text-gray-600"><%= post.review %></p>
+            <p class="text-gray-600"><%= post.review %></p>
           </div>
           <div class="flex justify-between items-center">
             <div class="flex justify-end">
