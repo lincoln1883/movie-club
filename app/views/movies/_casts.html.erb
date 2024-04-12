@@ -1,15 +1,16 @@
-<div>
+<div class="flex flex-col justify-center items-center w-full my-2">
   <% if @casts.present? %>
-    <h2 class="text-center">Cast</h2>
-    <ul class="flex flex-wrap justify-center items-center sm:flex-row gap-1">
+    <h2 class="text-center text-2xl text-white">Cast</h2>
+    <ul class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-1 w-full">
       <% @casts.each do |cast| %>
-        <li class="flex flex-col gap-1 items-center">
+        <li class="flex flex-col gap-1 justify-evenly items-center flex-1">
           <img class="w-32 h-32 rounded-full" src="https://image.tmdb.org/t/p/w500<%= cast['profile_path'] %>" alt="">
-          <p class="text-gray-900 leading-none text-sm"><%= cast['name']%></p>
-          <p class="text-gray-900 leading-none text-sm"><%= cast['known_for_department'] %></p>
+          <p class="text-gray-900 leading-none text-sm text-white"><%= cast['name']%></p>
+          <p class="text-gray-900 leading-none text-sm text-white"><%= cast['known_for_department'] %></p>
+        </li>
       <%end%>
     </ul>
   <%else%>
-    <p class="text-center">No casts found for this movie</p>
+    <p class="text-center my-2">No casts found for this movie</p>
   <%end%>
 </div>

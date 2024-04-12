@@ -1,73 +1,72 @@
 <section class="w-full h-full">
-  <div class="mt-5 flex items-center justify-start">
+  <div class="my-2 flex items-center justify-start">
     <%= link_to "Back", movies_path, class: "text-white bg-blue-500 p-2 rounded-lg w-18" %>
   </div>
-   <h1 class="text-center font-medium"><%= @movie['title']%></h1>
-    <div class="w-full lg:max-w-full lg:flex">
-      <div class="h-96 lg:h-auto lg:w-2/5 flex flex-col rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
-        <img src="https://image.tmdb.org/t/p/w500<%= @movie['poster_path'] %>"
-          class="w-full h-full" alt="<%= @movie['title'] %>">
-      </div>
-      <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-        <div class="mb-8">
-          <p class="text-gray-900 font-bold">Title:
-            <span class="text-pretty m-1 font-light"><%= @movie['title'] %></span>
+  <div class="w-full">
+    <div class="h-96 flex flex-col rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
+      <img src="https://image.tmdb.org/t/p/w500<%= @movie['backdrop_path'] %>"
+        class="w-full h-full" alt="<%= @movie['title'] %>">
+    </div>
+    <div class="border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-l lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div class="mb-8">
+        <p class="text-gray-900 font-bold">Title:
+          <span class="text-pretty m-1 font-light"><%= @movie['title'] %></span>
+        </p>
+        <p class="text-gray-900 font-bold">Overview:
+          <span class="text-pretty m-1 font-light"><%= @movie['overview'] %></span>
+        </p>
+        <div class="flex flex-col gap-1">
+          <p class="text-gray-900 font-bold">Released:
+            <span class="text-pretty m-1 font-light"><%= @movie['release_date'] %></span>
           </p>
-          <p class="text-gray-900 font-bold">Overview:
-            <span class="text-pretty m-1 font-light"><%= @movie['overview'] %></span>
+          <p class="text-gray-900 font-bold">Rating:
+            <span class="text-pretty font-light"> <%= @movie['vote_average'] * 10 %>%</span>
           </p>
-          <div class="flex flex-col gap-1">
-            <p class="text-gray-900 font-bold">Released:
-              <span class="text-pretty m-1 font-light"><%= @movie['release_date'] %></span>
-            </p>
-            <p class="text-gray-900 font-bold">Rating:
-              <span class="text-pretty font-light"> <%= @movie['vote_average'] * 10 %>%</span>
-            </p>
-            <p class="text-gray-900 font-bold">Runtime:
-              <span class="font-light"><%= @movie['runtime'] %> minutes</span>
-            </p>
-            <div class="flex item-center flex-wrap gap-1">
-              <p class="text-gray-900 font-bold">Genres: </p>
-              <% @movie['genres'].each do |ele| %>
-                <span class="text-gray-700 text-base"><%= ele['name'] %></span>
-              <% end %>
-            </div>
+          <p class="text-gray-900 font-bold">Runtime:
+            <span class="font-light"><%= @movie['runtime'] %> minutes</span>
+          </p>
+          <div class="flex item-center flex-wrap gap-1">
+            <p class="text-gray-900 font-bold">Genres: </p>
+            <% @movie['genres'].each do |ele| %>
+              <span class="text-gray-700 text-base"><%= ele['name'] %></span>
+            <% end %>
           </div>
-          <%= render partial: 'posts/form', locals: { post: @post, movie: @movie } %>
         </div>
-        <div class="flex flex-col">
-          <% if @location.present? && @providers.present? && @providers.key?(@location) %>
-            <h2>Watch Providers:</h2>
-            <ul class="flex gap-1">
-              <% if @providers[@location]['flatrate'].present? %>
-                <% @providers[@location]['flatrate'].each do |flatrate_provider| %>
-                  <li class="flex gap-2 justify-center items-center">
-                    <!--                <p class="text-gray-900 leading-none text-sm"> <%#= flatrate_provider['provider_name'].split(' ').delete(1) %></p>-->
-                    <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= flatrate_provider['logo_path'] %>" alt="provider name">
-                  </li>
-                <% end %>
-              <% elsif @providers[@location]['buy'].present? %>
-                <% @providers[@location]['buy'].each do |buy_provider| %>
-                  <li class="flex gap-1 justify-center items-center">
-                    <!--                <p class="text-gray-900 leading-none text-sm"><%#= buy_provider['provider_name'] %></p>-->
-                    <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= buy_provider['logo_path'] %>" alt="provider name"> <br>
-                  </li>
-                <% end %>
-              <% elsif  @providers[@location]['rent'].present? %>
-                <% @providers[@location]['rent'].each do |rent_provider| %>
-                  <li class="flex gap-1 justify-center items-center">
-                    <!--                <p class="text-gray-900 leading-none text-sm"><%#= rent_provider['provider_name'] %></p>-->
-                    <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= rent_provider['logo_path'] %>" alt="provider name"> <br>
-                  </li>
-                <% end %>
+        <%= render partial: 'posts/form', locals: { post: @post, movie: @movie } %>
+      </div>
+      <div class="flex flex-col">
+        <% if @location.present? && @providers.present? && @providers.key?(@location) %>
+          <h2>Watch Providers:</h2>
+          <ul class="flex gap-1">
+            <% if @providers[@location]['flatrate'].present? %>
+              <% @providers[@location]['flatrate'].each do |flatrate_provider| %>
+                <li class="flex gap-2 justify-center items-center">
+                  <!--                <p class="text-gray-900 leading-none text-sm"> <%#= flatrate_provider['provider_name'].split(' ').delete(1) %></p>-->
+                  <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= flatrate_provider['logo_path'] %>" alt="provider name">
+                </li>
               <% end %>
-            </ul>
-          <% else %>
-            <p class="text-center">No watch providers found for this movie in your country.</p>
-          <% end %>
-        </div>
+            <% elsif @providers[@location]['buy'].present? %>
+              <% @providers[@location]['buy'].each do |buy_provider| %>
+                <li class="flex gap-1 justify-center items-center">
+                  <!--                <p class="text-gray-900 leading-none text-sm"><%#= buy_provider['provider_name'] %></p>-->
+                  <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= buy_provider['logo_path'] %>" alt="provider name"> <br>
+                </li>
+              <% end %>
+            <% elsif  @providers[@location]['rent'].present? %>
+              <% @providers[@location]['rent'].each do |rent_provider| %>
+                <li class="flex gap-1 justify-center items-center">
+                  <!--                <p class="text-gray-900 leading-none text-sm"><%#= rent_provider['provider_name'] %></p>-->
+                  <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= rent_provider['logo_path'] %>" alt="provider name"> <br>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-center">No watch providers found for this movie in your country.</p>
+        <% end %>
       </div>
     </div>
+  </div>
 </section>
 <section>
   <%= render partial: 'movies/trailers' %>

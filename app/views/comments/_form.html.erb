@@ -1,6 +1,6 @@
 <div class="flex flex-col">
   <%= form_for(@comment, url: post_comments_path(post_id: @post.id), method: :post) do |f| %>
-  <%= f.text_area :thought, class: "w-full p-2 rounded border border-gray-400", placeholder: "Add a comment" %>
-  <%= f.submit "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:cursor-pointer" %>
+    <%= f.text_area :thought, class: "w-full p-2 rounded border border-gray-400", placeholder: "Add a comment" %>
+    <%= f.submit "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:cursor-pointer" %>
   <% end %>
 </div>
