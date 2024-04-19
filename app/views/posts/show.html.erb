@@ -1,9 +1,9 @@
 <div class="min-h-full mb-8">
-  <div class="self-start">
+  <div class="self-start mb-1">
     <%= link_to "Back", posts_path, class: "text-blue-500" %>
   </div>
   <div class="flex flex-col gap-2 items-center">
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 text-white">
       <div class="flex gap-1">
         <div class="w-8 h-8 rounded-full">
           <%= image_tag(@post.author.avatar) %>
@@ -20,8 +20,8 @@
         </div>
         <div class="flex flex-col gap-1 leading-normal px-2">
           <h1 class="text-xl font-bold text-center"><%= @post.title %></h1>
-          <p class="text-lg text-gray-500 text-sm">Overview: <%= @post.overview %></p>
-          <p class="text-lg text-gray-500 text-sm">Rating: <%= @post.rating %>%</p>
+          <p class="text-gray-500 text-sm">Overview: <%= @post.overview %></p>
+          <p class="text-gray-500 text-sm">Rating: <%= @post.rating %>%</p>
           <p class="sm:text-lg text-gray-500 text-sm">Runtime: <%= @post.runtime %> minutes</p>
           <p class="sm:text-lg text-gray-500 text-sm">Released: <%= @post.release_date %></p>
           <p class="sm:text-lg text-gray-500 text-sm">Genres:
@@ -48,7 +48,7 @@
       </div>
       <% if @post.comments.present? %>
         <% @post.recent_comments.each do |comment| %>
-          <div class="flex gap-1 p-2 items-center border-r border-b border-l lg:border-t bg-white rounded-b lg:rounded-b-none lg:rounded-r lg:border-gray-400 rounded-t lg:rounded-l">
+          <div class="flex gap-1 p-2 items-center border-r border-b border-l lg:border-t bg-transparent rounded-b lg:rounded-b-none lg:rounded-r lg:border-gray-400 rounded-t lg:rounded-l">
             <div class="flex flex-col gap-1 w-full">
               <p class="text-start"><%= comment.thought %></p>
               <p class="text-start"><%= comment.author.username %></p>

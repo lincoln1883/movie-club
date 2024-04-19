@@ -1,0 +1,31 @@
+<div class="flex flex-col">
+  <% if @location.present? && @providers.present? && @providers.key?(@location) %>
+    <h2>Watch Providers:</h2>
+    <ul class="flex gap-1">
+      <% if @providers[@location]['flatrate'].present? %>
+        <% @providers[@location]['flatrate'].each do |flatrate_provider| %>
+          <li class="flex gap-2 justify-center items-center">
+            <!--                <p class="text-gray-900 leading-none text-sm"> <%#= flatrate_provider['provider_name'].split(' ').delete(1) %></p>-->
+            <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= flatrate_provider['logo_path'] %>" alt="provider name">
+          </li>
+        <% end %>
+      <% elsif @providers[@location]['buy'].present? %>
+        <% @providers[@location]['buy'].each do |buy_provider| %>
+          <li class="flex gap-1 justify-center items-center">
+            <!--                <p class="text-gray-900 leading-none text-sm"><%#= buy_provider['provider_name'] %></p>-->
+            <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= buy_provider['logo_path'] %>" alt="provider name"> <br>
+          </li>
+        <% end %>
+      <% elsif  @providers[@location]['rent'].present? %>
+        <% @providers[@location]['rent'].each do |rent_provider| %>
+          <li class="flex gap-1 justify-center items-center">
+            <!--                <p class="text-gray-900 leading-none text-sm"><%#= rent_provider['provider_name'] %></p>-->
+            <img class="w-10 h-10 rounded-full mr-4" src="https://image.tmdb.org/t/p/w500<%= rent_provider['logo_path'] %>" alt="provider name"> <br>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-center">No watch providers found for this movie in your country.</p>
+  <% end %>
+</div>

@@ -1,19 +1,17 @@
 <% if @recommended.present? %>
   <h2 class="text-center text-2xl my-2 text-white">Recommended Movies</h2>
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
     <% @recommended.each do |movie| %>
-      <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
-        <img class="w-full" src="https://image.tmdb.org/t/p/w500<%= movie['poster_path'] %>" alt=<% movie['title'] %> >
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2"><%= movie['title'] %></div>
-          <div class="font-medium">
-            <%= movie['release_date'] %>
+      <%= link_to movie_path(movie['id']) do %>
+        <div class="max-w-sm rounded overflow-hidden shadow-2xl bg-transparent">
+          <img class="w-full" src="https://image.tmdb.org/t/p/w500<%= movie['poster_path'] %>" alt=<% movie['title'] %> >
+          <div class="p-2 text-gray-300">
+            <h3 class="font-medium text-lg mb-1 line-clamp-1"><%= movie['title'] %></h3>
+            <p class="font-medium"><%= movie['release_date'] %></p>
+            <p class="font-medium"><%= movie['vote_average'].round * 10 %>%</p>
           </div>
         </div>
-        <div class="px-6 pt-4 pb-2">
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= link_to "Show", movie_path(movie['id']) %></span>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 <% else %>

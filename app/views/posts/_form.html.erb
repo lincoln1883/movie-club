@@ -11,7 +11,7 @@
   <%= f.hidden_field :genres, value: @movie['genres'].map { |genre| genre['name'] } %>
 
   <div class="my-2">
-    <%= f.label :review, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= f.label :review, class: "block text-gray-300 text-sm font-bold mb-2" %>
     <%= f.text_area :review, class: "w-full p-2 rounded border border-gray-400", placeholder: "Add a review here..." %>
   </div>
 
