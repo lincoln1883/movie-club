@@ -19,7 +19,7 @@
           <span class="text-pretty m-1 font-light"><%= @movie['release_date'] %></span>
         </p>
         <p class="text-gray-300 font-bold">Rating:
-          <span class="text-pretty font-light"> <%= @movie['vote_average'] * 10 %>%</span>
+          <span class="text-pretty font-light"> <%= @movie['vote_average'].ceil * 10 %>%</span>
         </p>
         <p class="text-gray-300 font-bold">Runtime:
           <span class="font-light"><%= @movie['runtime'] %> minutes</span>
