@@ -5,7 +5,7 @@
   <div class="flex flex-col gap-2 items-center">
     <div class="flex flex-col gap-1 text-white">
       <div class="flex gap-1">
-        <div class="w-8 h-8 rounded-full">
+        <div class="w-8 h-8 rounded-full pt-2">
           <%= image_tag(@post.author.avatar) %>
         </div>
         <div class="flex flex-col gap-0.5 p-2">
@@ -29,19 +29,29 @@
             <span class="text-gray-700 text-base"><%= genre %></span>
             <% end %>
           </p>
-          <% if current_user.id == @post.author.id %>
           <div class="flex gap-2">
-            <%= link_to "Edit", edit_post_path(@post), class: "text-blue-500" %>
-            <%= button_to "Delete", post_path(@post), data: { confirm: "Are you sure?" }, method: :delete, class: "text-red-500" %>
+            <div class="flex gap-2">
+              <% if current_user.id == @post.author.id %>
+              <%= link_to "Edit", edit_post_path(@post), class: "text-blue-500" %>
+              <%= button_to "Delete", post_path(@post), data: { confirm: "Are you sure?" }, method: :delete, class: "text-red-500" %>
+              <% end %>
+            </div>
+            <div>
+              <% like = current_user.likes.find_by(post: @post) %>
+              <% if like.nil? %>
+              <%= button_to "Like", likes_path, params:{like:{post_id: @post.id, author_id: current_user.id}}, class: "hover: curser-pointer" ,method: :post %>
+              <% else %>
+              <%= button_to "Unlike", like_path(like), class: "hover: curser-pointer" , method: :delete %>
+              <% end %>
+            </div>
           </div>
-          <% end %>
           <div class="flex w-full items-center flex-1">
             <div class="flex flex-col w-full">
               <%= render partial: "comments/form",locals: {post: @post}%>
-            <div class="flex gap-1 p-2 justify-end">
-              <p class="self-end"><%= @post.comments_count %> comments</p>
-              <p class="self-end"><%= @post.likes_count %> likes</p>
-            </div>
+              <div class="flex gap-1 p-2 justify-end">
+                <p class="self-end"><%= @post.comments_count %> comments</p>
+                <p class="self-end"><%= @post.likes_count %> likes</p>
+              </div>
             </div>
           </div>
         </div>
