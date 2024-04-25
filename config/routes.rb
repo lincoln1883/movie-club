@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   resources :movies, only: %i[index show]
   resources :users
+  resources :likes, only: %i[create destroy]
 
   resources :posts do
     resources :comments
-    resources :likes
   end
 
   root 'movies#index'
