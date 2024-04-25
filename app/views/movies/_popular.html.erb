@@ -2,17 +2,17 @@
 <div class="flex my-2 overflow-x-scroll">
   <% @popular.each do |movie| %>
     <div class="my-2">
-      <a href="<%= movie_path(movie['id']) %>">
+      <%= link_to movie_path(movie['id']) do %>
         <div class="bg-transparent flex-shrink-0 w-56 mr-4 rounded-lg shadow-2xl group">
           <img class="w-full h-64 object-cover object-center" src="https://image.tmdb.org/t/p/w500<%= movie['poster_path'] %>"
                alt="<%= movie['title'] %>">
+          <% end %>
           <div class="p-4">
             <h1 class="text-md font-bold line-clamp-1 text-white"><%= movie['title'] %></h1>
             <p class="text-gray-300 text-pretty font-light"><%= movie['vote_average'].round * 10 %>%</p>
             <p class="text-gray-300 text-pretty font-light"><%= movie['release_date'] %></p>
           </div>
         </div>
-      </a>
     </div>
   <% end %>
 </div>

@@ -2,16 +2,17 @@
   <h2 class="text-center text-2xl my-2 text-white">Recommended Movies</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
     <% @recommended.each do |movie| %>
-      <%= link_to movie_path(movie['id']) do %>
         <div class="max-w-sm rounded overflow-hidden shadow-2xl bg-transparent">
-          <img class="w-full" src="https://image.tmdb.org/t/p/w500<%= movie['poster_path'] %>" alt=<% movie['title'] %> >
-          <div class="p-2 text-gray-300">
-            <h3 class="font-medium text-lg mb-1 line-clamp-1"><%= movie['title'] %></h3>
-            <p class="font-medium"><%= movie['release_date'] %></p>
-            <p class="font-medium"><%= movie['vote_average'].round * 10 %>%</p>
-          </div>
-        </div>
+      <%= link_to movie_path(movie['id']) do %>
+        <img class="w-full" src="https://image.tmdb.org/t/p/w500<%= movie['poster_path'] %>"
+             alt=<% movie['title'] %> >
       <% end %>
+        <div class="p-2 text-gray-300">
+          <h3 class="font-medium text-lg mb-1 line-clamp-1"><%= movie['title'] %></h3>
+          <p class="font-medium"><%= movie['release_date'] %></p>
+          <p class="font-medium"><%= movie['vote_average'].round * 10 %>%</p>
+        </div>
+        </div>
     <% end %>
   </div>
 <% else %>
