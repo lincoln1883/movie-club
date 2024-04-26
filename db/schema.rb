@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_021705) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_223034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -75,12 +75,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_021705) do
 
   create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "author_id", null: false
-    t.uuid "post_id", null: false
+    t.uuid "likeable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id", "post_id"], name: "index_likes_on_author_id_and_post_id", unique: true
+    t.string "likeable_type"
     t.index ["author_id"], name: "index_likes_on_author_id"
-    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["likeable_id", "likeable_type", "author_id"], name: "index_likes_on_likeable_id_and_likeable_type_and_author_id", unique: true
+    t.index ["likeable_id", "likeable_type"], name: "index_likes_on_likeable_id_and_likeable_type"
+    t.index ["likeable_id"], name: "index_likes_on_likeable_id"
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -127,7 +129,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_021705) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users", column: "author_id"
-  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "posts", column: "likeable_id"
   add_foreign_key "likes", "users", column: "author_id"
   add_foreign_key "posts", "users", column: "author_id"
 end

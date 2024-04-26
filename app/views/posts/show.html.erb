@@ -37,9 +37,9 @@
               <% end %>
             </div>
             <div>
-              <% like = current_user.likes.find_by(post: @post) %>
+              <% like = current_user.likes.find_by(likeable: @post) %>
               <% if like.nil? %>
-              <%= button_to "Like", likes_path, params:{like:{post_id: @post.id, author_id: current_user.id}}, class: "hover: curser-pointer" ,method: :post %>
+              <%= button_to "Like", likes_path, params:{like:{likeable_id: @post.id, likeable_type: "Post" ,author_id: current_user.id}}, class: "hover: curser-pointer" ,method: :post %>
               <% else %>
               <%= button_to "Unlike", like_path(like), class: "hover: curser-pointer" , method: :delete %>
               <% end %>
@@ -57,7 +57,7 @@
         </div>
       </div>
       <% if @post.comments.present? %>
-        <% @post.recent_comments.each do |comment| %>
+        <% @post.comments.each do |comment| %>
           <div class="flex gap-1 p-2 items-center border-r border-b border-l lg:border-t bg-transparent rounded-b lg:rounded-b-none lg:rounded-r lg:border-gray-400 rounded-t lg:rounded-l">
             <div class="flex flex-col gap-1 w-full">
               <p class="text-start"><%= comment.thought %></p>
@@ -70,6 +70,14 @@
                 <%= button_to "Delete", post_comment_path(@post, comment), data: { confirm: "Are you sure?" }, method: :delete, class: "text-red-500" %>
               </div>
             <% end %>
+            <div>
+              <% like = current_user.likes.find_by(likeable: comment) %>
+              <% if like.nil? %>
+              <%= button_to "Like", likes_path, params:{like:{likeable_id: comment.id, likeable_type: "Comment" ,author_id: current_user.id}}, class: "hover: curser-pointer" ,method: :post %>
+              <% else %>
+              <%= button_to "Unlike", like_path(like), class: "hover: curser-pointer" , method: :delete %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>

@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :author, class_name: "User", foreign_key: :author_id
   belongs_to :post, class_name: "Post", foreign_key: :post_id
+  has_many :likes, as: :likeable
 
   validates :thought, presence: true, length: {minimum: 3, maximum: 500}
 
